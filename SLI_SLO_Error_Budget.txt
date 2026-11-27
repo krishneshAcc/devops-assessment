@@ -1,0 +1,73 @@
+SLI, SLO, Error budget for a Web Service
+
+Project: Customer-Faceing login API
+ROle: Site Reliability Engineer(SRE)
+
+1) Service Level Indicator(SLI)
+SLI is a measurable metric used to evaluate the reliability of a service.
+The SLI measures the percentage of successful login requests returning HTTP 2xx status codes.
+
+The formula for SLI(%) calculation is:
+
+SLI(%) = (Successful login/total login) x 100
+
+Here:
+Successful login = Requests returning HTTP 2xx response.
+Total login = Total eligible login request received.
+
+2) Service Level Objective(SLO)
+SLO is the target reliability level that a service is expected to achieve over a specific period of time.
+
+Target SLo = 99.9%
+
+3) Monthly ERROR BUDGET Calculation
+AN "Error Budget" represents the acceptabe amout of failure permitted whilw mwwting the SLO.
+
+Formula:
+Error Budget = 100 - SLO%
+
+Calculation:
+Error Budget = 100 - 99.9 = 0.1%
+
+For example lets take this calculation:
+Assume the Login API receives 10000000 requests in a month.
+
+Total requests = 10000000
+
+Required Successful request = 10000000 * 99.9% = 9990000
+
+So, the allowed failed request = 10000000 * 0.1% = 10000
+
+Therefore, the Monthly Error Budget = 10000 failed requests.
+
+ 
+Target: 99.9%
+
+The login API must successfully process atleast 99.9% of eligible login requests.
+
+
+4) Explanation of error budget Usage:
+
+   (i) The error budget is monitored continously throughout the month.
+   (ii) Every failed login request consumes a  part of error budget.
+   (iii) When the budget is available development teams can continue the planned feature releases.
+   (iv) When budget is being used continously, the tam finds out the incidents and prioririzes reliability  improvements.
+   (v) When error budget is over, non-essential feature releases are stopped.
+
+5) Action/what happens when Error Budget is exhausted
+
+   (i) ALl the non-essential feature releases are stopped.
+   (ii) Prioritize bug fixes and reliabilty improbvements.
+   (iii) Finding out the root cause of incident  and analyse it.
+    (iv) Improve the monitoring and alterting of exhaution. 
+    (v) Conduct reliabilty testing before resuming normal releases.
+    (vi) Implement an error-budget based release gate to prevent further reliability degradation.
+
+
+6) Conclusion 
+The login API has a target SLO of 99.9% successful requests per month and an error budget of 0.1%. 
+
+Monitoring SLI, maintaing SLO and managing error budget help balance further development with dervice reliability.
+
+The primary focus of SRE is continous systemic improvement, service stability and customer satisfaction.
+
